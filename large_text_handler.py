@@ -3,7 +3,7 @@ from typing import List, Dict
 import json
 
 class TranslationHandler:
-    def __init__(self, max_tokens: int = 8000):
+    def __init__(self, max_tokens: int = 7000):
         self.max_tokens = max_tokens
         
     def split_text(self, text: str) -> List[str]:
@@ -11,7 +11,7 @@ class TranslationHandler:
         智能分割文本,确保上下文的完整性
         """
         # 首先按段落分割
-        paragraphs = text.split('\n\n')
+        paragraphs = text.split('\n')
         chunks = []
         current_chunk = ""
         
@@ -41,8 +41,8 @@ class TranslationHandler:
                     chunks.append(temp_chunk)
             else:
                 # 检查当前chunk加上新段落是否超过限制
-                if len(current_chunk) + len(para) + 2 < self.max_tokens:
-                    current_chunk += ("\n\n" if current_chunk else "") + para
+                if len(current_chunk) + len(para) + 1 < self.max_tokens:
+                    current_chunk += ("\n" if current_chunk else "") + para
                 else:
                     if current_chunk:
                         chunks.append(current_chunk)
@@ -72,7 +72,7 @@ class TranslationHandler:
         """
         合并翻译结果
         """
-        return "\n".join(translations)
+        return "\n****\n".join(translations)
     
     def process_text(self, text: str) -> List[Dict]:
         """
@@ -90,25 +90,29 @@ def example_usage():
     
     
     # 准备翻译请求
-    translation_requests = handler.process_text(text)
+    translation_requests = handler.process_text(english_text)
     
     # 这里需要实现实际的API调用逻辑
     translations = []
     for request in translation_requests:
         # 示例API调用格式
-        api_request = {
-            "text": request["text"],
-            "system_prompt": f"""Please translate the following text to Chinese. 
-            This is {request['position']}. 
-            Previous context: {request['previous_context']}
-            Next context: {request['next_context']}"""
-        }
-        # translations.append(call_translation_api(api_request))
+        # api_request = {
+        #     "text": request["text"],
+        #     "system_prompt": f"""Please translate the following text to Chinese. 
+        #     This is {request['position']}. 
+        #     Previous context: {request['previous_context']}
+        #     Next context: {request['next_context']}"""
+        # }
+        translations.append(request["text"])
+    #     # translations.append(call_translation_api(api_request))
     
-    # 合并结果
-    final_translation = handler.merge_translations(translations)
-    print(translation_requests)
-    return []
+    # # 合并结果
+    # final_translation = handler.merge_translations(translations)
+    # print(translation_requests)
+    with open("test.txt", 'w') as file:
+            file.write("\n".join(translations))
+
+example_usage()
 
 
 
