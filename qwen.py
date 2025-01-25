@@ -4,9 +4,9 @@ import re
 import os
 
 qwen_model = "qwen-turbo-1101"  # qwen-turbo-latest
-file_path = "meta/"
-file_name = "meta"
-max_output_tokens = 4000
+file_path = "acquired/space/"
+file_name = "space"
+max_output_tokens = 5000
 
 
 def call_qwen(prompt, data, model, log_name):
