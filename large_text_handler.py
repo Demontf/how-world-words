@@ -112,7 +112,5 @@ def example_usage():
     with open("test.txt", 'w') as file:
             file.write("\n".join(translations))
 
-example_usage()
-
 
 

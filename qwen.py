@@ -1,10 +1,12 @@
 from openai import OpenAI
 from large_text_handler import TranslationHandler
 import re
+import os
 
 qwen_model = "qwen-turbo-1101"  # qwen-turbo-latest
-file_name = "mars"
-max_output_tokens = 5000
+file_path = "meta/"
+file_name = "meta"
+max_output_tokens = 4000
 
 
 def call_qwen(prompt, data, model, log_name):
@@ -33,6 +35,7 @@ def call_qwen(prompt, data, model, log_name):
             content += choice.message.content  # 拼接内容并加上空格分隔
         return content
     except Exception as e:
+        print("call qwen error")
         print(e)
 
     return data
@@ -40,6 +43,13 @@ def call_qwen(prompt, data, model, log_name):
     
 
 def save_ch(ch_file_name,data):
+    # 提取目录路径
+    directory = os.path.dirname(ch_file_name)
+    
+    # 如果目录不存在，创建目录
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory)
+
     try:
         with open(ch_file_name, 'w') as file:
             file.write(data)
@@ -49,6 +59,12 @@ def save_ch(ch_file_name,data):
             raise
 
 def save_ch_append(ch_file_name,data):
+    # 提取目录路径
+    directory = os.path.dirname(ch_file_name)
+    
+    # 如果目录不存在，创建目录
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory)
     try:
         with open(ch_file_name, 'a') as file:
             file.write(data)
@@ -67,7 +83,7 @@ def count_hanzi(text):
 def load_eng_text():
 
     try:
-        with open(file_name+'.txt', 'r', encoding='utf-8') as f:
+        with open(file_path+file_name+'.txt', 'r', encoding='utf-8') as f:
             english_text = f.read()
             text_len = count_words_in_file(english_text)
             print('Read file Success: total has '+str(text_len)+ ' words')
@@ -91,7 +107,7 @@ if __name__ == '__main__':
     #translations = []
     print("文章分"+str(len(translation_requests))+"部分进行翻译")
     for request in translation_requests:
-        print("输入英文："+str(count_words_in_file(request['text'])))
+        print(str(idx)+"/"+str(len(translation_requests))+" 输入英文："+str(count_words_in_file(request['text'])))
         # prompt
         # translate_prompt = f"""我给你提供英文文本，为了翻译更准确和流畅，同时提供了对应文本的上下文。上文的内容是:{request['previous_context']}
         # ,之后的部分内容是: {request['next_context']} . 当前位置: {request['position']}。 
@@ -102,11 +118,11 @@ if __name__ == '__main__':
         翻译要求1.中文和英文段落要对应,格式(如换行等)保持一致，2.仅返回对应文本的翻译内容，额外的文字都不需要. 3.涉及敏感和违规词汇请用**代替
         需翻译的英文如下: """
         
-        save_ch(str(idx)+".prompt",translate_prompt+request["text"])
-        result = call_qwen(translate_prompt,request["text"],qwen_model,str(idx)+".json")
+        save_ch(file_path+"log/"+str(idx)+".prompt",translate_prompt+request["text"])
+        result = call_qwen(translate_prompt,request["text"],qwen_model,file_path+"log/"+str(idx)+".json")
         print("输出结果 result:"+str(count_hanzi(result)))
         #print(result)
-        save_ch_append(file_name+"_ch.txt","\n"+result)
+        save_ch_append(file_path+file_name+"_ch.txt","\n"+result)
         #translations.append(result)
         idx +=1 
     
@@ -115,7 +131,6 @@ if __name__ == '__main__':
     #print(translation_requests)
     
     #save_ch(file_name+"_ch.txt",final_translation)
-
 
 
 
