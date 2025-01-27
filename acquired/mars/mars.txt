@@ -33,12 +33,6 @@ Ben: Yeah. Mars also owns way more than you think. You may know that they own th
 David, here’s one crazy stat to illustrate their sheer size. Do you know Mars now does more revenue than the Coca-Cola company?
 David: I know. Wild.
 Ben: Mars crossed $50 billion in sales last year, and they’re still completely privately owned by the Mars family, making it one of the top five largest private companies in America. This really is an incredible American and global story.
-Listeners, after this episode come listen to ACQ2. We just had one of my favorite conversations ever on the show, in part because I just love talking computer architecture, with Rene Haas, who is the CEO of Arm Holdings, the chip design company that makes the designs and the instruction set architecture of everything inside your smartphone, your car, your laptop, and now even massively in the data centers.
-David: Between Synopsys and now Arm, we’re going to have to rename ACQ2 into Acquired Semiconductors.
-Ben: Totally. It was a great computer science lesson and history lesson all rolled into one. Go subscribe to the ACQ2 feed in the podcast player of your choice to check it out.
-We’ve got a survey winner. Thank you to everyone who took our survey. It is Kirti from Boston. We will email you with details on how to claim your free Ray Ban Metas, and 10 other folks in addition to Kirti will also receive free ACQ dad hats. Keep an eye out and your email if that is you.
-Before we dive in, we want to briefly thank our presenting sponsor, J.P. Morgan Payments, for an incredible year.
-David: Yes, just like how we say, every company has a story, every company’s story is powered by payments, and J.P. Morgan Payments is a part of so many of their journeys, from seed to IPO and beyond.
 Ben: Yup. With that, this show is not investment advice. David and I may have investments in the companies we discuss, although not Mars, obviously, and this show is for informational and entertainment purposes only. David, where do we start our story?
 David: We start in September, 1883. There’s some debate about whether it’s in Pennsylvania or Minnesota. There’s a lot of legend, shall we say, about the Mars family, which we will get into as we go here.
 Before we start, I have to say a thank you to Joël Glenn Brenner, who wrote the amazing book, The Emperors of Chocolate. Mars, as we’ll talk about, is an incredibly private company and private family. She’s the only journalist that ever got real access to the company ever.
